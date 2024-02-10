@@ -4,9 +4,13 @@ import sys
 def get_file_content(file_path):
     """ Extracts the contents of a file. """
 
-    with open(file_path) as f:
-            file_content = f.read()
-    
+    try:
+        with open(file_path) as f:
+                file_content = f.read()
+    except:
+        print(f"Error while reading the file. Check your file path.")
+        sys.exit(1)
+
     return file_content
 
 
@@ -67,10 +71,11 @@ def print_report(file_path, num_words, num_characters):
 def main():
     """ Runs the program. """
 
-    if len(sys.argv) > 1:
+    if len(sys.argv) == 2:
         file_path = sys.argv[1]
     else:
-        raise Exception("Command format: python3 bookbot.py path/to/book/file/")
+        print("Correct command format: python3 bookbot.py path/to/book/file/")
+        sys.exit(1)
     
     file_content = get_file_content(file_path)
     num_words = count_words(file_content)
