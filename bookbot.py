@@ -5,41 +5,34 @@ def get_file_content(file_path):
     """ Extracts the contents of a file. """
 
     with open(file_path) as f:
-        file_content = f.read()
-
-    return file_content
+        return f.read()
 
 
 def count_words(text):
     """ Counts the number of words in a string. """
 
-    words = text.split()
-    num_words = len(words)
-    return num_words
+    return len(text.split())
 
 
 def sort_dict_by_value(unordered):
     """ Sorts a dict in descending order based on its values. """
 
-    ordered = dict(sorted(unordered.items(), key=lambda d: d[1], reverse=True))
-    return ordered
+    return dict(sorted(unordered.items(), key=lambda d: d[1], reverse=True))
 
 
 def count_characters(text):
     """ Counts the number of times all the letters appear on a text. """
 
-    lower_text = text.lower()
     num_characters = {}
 
-    for character in lower_text:
+    for character in text.lower():
         if character.isalpha():
             if character in num_characters:
                 num_characters[character] += 1
             else:
                 num_characters[character] = 1
 
-    num_characters = sort_dict_by_value(num_characters)
-    return num_characters
+    return sort_dict_by_value(num_characters)
 
 
 def print_report(file_path, num_words, num_characters):
@@ -57,7 +50,6 @@ def print_report(file_path, num_words, num_characters):
     
     for character in num_characters:
         print(f"\t\t{character}: {num_characters[character]}")
-    pass
 
     print()
     print("End of report")
@@ -73,9 +65,12 @@ def main():
         raise Exception("Command format: python3 bookbot.py path/to/book/file/")
     
     file_content = get_file_content(file_path)
-    num_words = count_words(file_content)
-    num_characters = count_characters(file_content)
-    print_report(file_path, num_words, num_characters)
+    
+    print_report(
+        file_path, 
+        count_words(file_content), 
+        count_characters(file_content)
+        )
 
 
 main()
