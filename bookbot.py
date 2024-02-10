@@ -17,7 +17,9 @@ def count_words(text):
 def sort_dict_by_value(unordered):
     """ Sorts a dict in descending order based on its values. """
 
-    return dict(sorted(unordered.items(), key=lambda d: d[1], reverse=True))
+    return dict(sorted(unordered.items(),
+                       key=lambda d: d[1],
+                       reverse=True))
 
 
 def count_characters(text):
@@ -62,10 +64,11 @@ def main():
     if len(sys.argv) == 2:
         file_path = sys.argv[1]
     else:
-        raise Exception("Command format: python3 bookbot.py path/to/book/file/")
+        raise Exception("Command format: \
+                        python3 bookbot.py path/to/book/file/")
     
     file_content = get_file_content(file_path)
-    
+
     print_report(
         file_path, 
         count_words(file_content), 
